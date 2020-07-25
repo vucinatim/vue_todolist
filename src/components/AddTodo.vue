@@ -68,9 +68,13 @@ export default {
         position: relative;
     }
 
+    input[type="text"], input[type="date"], textarea {
+        background-color: #f0f0f0 !important;
+    }
+
     input[type="text"] {
         border: none;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid rgb(192, 192, 192);
         width: 100%;
         padding: 2px 10px;
         font-size: 18px;
@@ -95,11 +99,11 @@ export default {
     input[type="date"] {
         margin-left: 10px;
         border: none;
-        border-bottom: 1px solid rgb(216, 216, 216);
+        border-bottom: 1px solid rgb(192, 192, 192);
     }
 
     textarea {
-        border: 1px solid rgb(216, 216, 216);
+        border: 1px solid rgb(192, 192, 192);
         padding: 10px;
         margin: 10px 0px 20px 0px;
         width: 100%;

@@ -34,16 +34,24 @@ export default {
     line-height: 1.4;
     margin: 0;
     height: 100%;
-    background-image: linear-gradient(#d3d3d3, #bdbdbd);
+    background-image: linear-gradient(#d8d8d8, #b6b6b6);
     }
 
     .container {
-    max-width: 600px;
-    margin: 0 auto;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .content-between {
+        justify-content: space-between;
     }
 
     .card {
-    background-color: white;
+    background-color: #f0f0f0;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 10px 0px;
     padding: 4px 16px;
@@ -53,7 +61,7 @@ export default {
     display: inline-block;
     border: none;
     background: #555;
-    color: #fff;
+    color: #f0f0f0;
     padding: 7px 20px;
     cursor: pointer;
     }

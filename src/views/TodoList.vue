@@ -1,19 +1,23 @@
 <template>
   <div id="todo-list">
-    <AddTodo v-on:add-todo="addTodo"/>
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
+    <!-- <div> -->
+      <AddTodo v-on:add-todo="addTodo"/>
+      <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import Todos from '../components/Todos';
 import AddTodo from '../components/AddTodo';
+// import Sidebar from '../components/layout/Sidebar';
 
 export default {
   name: 'TodoList',
   components: {
     Todos,
-    AddTodo
+    AddTodo,
+    // Sidebar
   },
   data() {
     return {
