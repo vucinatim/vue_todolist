@@ -1,10 +1,8 @@
 <template>
     <header class="header">
-        <h1>TodoList</h1>
-        <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/todo-list">Todo List</router-link>
-        </div>
+        <h5>Tim Vucina</h5>
+        <h5>Todo List</h5>
+        <router-link to="/">Home</router-link>
     </header>
 </template>
 
@@ -16,10 +14,12 @@ export default {
 
 <style scoped>
     .header {
-        background: #333;
+        background: #33b5e5;
         color: #fff;
         text-align: center;
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .header a {

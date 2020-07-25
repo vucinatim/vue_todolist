@@ -1,10 +1,18 @@
 <template>
-    <div class="todo-item" v-bind:class="{'is-complete':todo.completed}">
-        <p>
-            <input type="checkbox" v-on:change="toggleComplete">
-            {{ todo.title }}
-            <button @click="$emit('del-todo', todo.id)" class="del">x</button>
-        </p>
+    <div class="card">
+        <div class="todo-item" v-bind:class="{'is-complete':todo.completed}">
+          <div class="flex-container">
+              <div class="flex-item">
+                  <input type="checkbox" v-model="todo.completed">
+                  <div class="keep-inline">
+                      <p>{{ todo.title }}</p>
+                      <small>{{ todo.description }}</small>
+                  </div>
+              </div>
+              <small>{{ timeUntilDeadline(todo.deadline) }}</small>
+              <button @click="$emit('del-todo', todo.id)" class="flex-item del"> &times; </button>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -13,31 +21,60 @@ export default {
     name: "TodoItem",
     props: ["todo"],
     methods: {
-        toggleComplete() {
-            this.todo.completed = !this.todo.completed;
-        }
+      timeUntilDeadline(deadline) {
+        var diffTime = deadline - new Date();
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if (diffDays > 0)
+          return diffDays + " days left.";
+        else
+          return "Deadline reached!";
+      }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+    .card:hover {
+      background-color: darken($color: #fafafa, $amount: 5%);
+    }
+
     .todo-item {
-        background: #f4f4f4;
         padding: 10px;
-        border-bottom: 1px #ccc dotted;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .flex-container {
+          display: flex;
+          justify-content: space-between;
+
+          input[type="checkbox"] {
+            width:20px;
+            height:100%;
+            margin-right: 26px;
+            cursor: pointer;
+          }
+        }
     }
 
     .is-complete {
+      p {
         text-decoration: line-through;
+      }
     }
 
     .del {
-        background: #ff0000;
-        color: #fff;
+        color: rgb(48, 48, 48);
+        background: none;
+        font-size: 24px;
         border: none;
-        padding: 5px 9px;
-        border-radius: 50%;
         cursor: pointer;
         float: right;
+
+        &:focus {
+            outline: 0;
+        }
     }
 </style>
