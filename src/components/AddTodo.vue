@@ -74,10 +74,6 @@
     transition: 0.5;
   }
 
-  .text-center {
-    text-align: center;
-  }
-
   form {
     margin: 20px 0px;
     position: relative;

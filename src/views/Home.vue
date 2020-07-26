@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="create-new-box">
+    <div class="create-new-box" @click="createNewList">
       <div class="text-icon">+</div>
       <p class="subtitle">Create a new Todolist</p>
     </div>
@@ -12,6 +12,7 @@
 
 <script>
   import EnterListBtn from "@/components/EnterListBtn.vue";
+  import { v4 as uuidv4 } from "uuid";
 
   export default {
     name: "Home",
@@ -19,6 +20,19 @@
       EnterListBtn,
     },
     props: ["lists"],
+    methods: {
+      createNewList(e) {
+        e.preventDefault();
+
+        const newList = {
+          id: uuidv4(),
+          title: "New Todo List",
+          todos: [],
+        };
+        // Send new list up to parent
+        this.$emit("create-list", newList);
+      },
+    },
   };
 </script>
 

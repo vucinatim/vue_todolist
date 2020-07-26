@@ -13,7 +13,7 @@
               v-model="todo.completed"
               @change="$emit('update-todo', todo)"
             />
-            <div class="keep-inline">
+            <div class="float-right">
               <p>{{ todo.title }}</p>
               <small>{{ todo.description }}</small>
             </div>
@@ -40,7 +40,7 @@
           <textarea v-model="todoDescription" name="todoDescription"></textarea>
           <label for="todoDeadline">Deadline: </label>
           <input type="date" v-model="todoDeadline" name="todoDeadline" />
-          <div class="float-right">
+          <div class="keep-inline">
             <input type="submit" value="Save" class="btn" />
             <input
               type="button"
@@ -154,7 +154,7 @@
     background-color: #33b5e5;
   }
 
-  .float-right {
+  .keep-inline {
     display: flex;
     justify-content: flex-end;
   }

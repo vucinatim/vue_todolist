@@ -68,6 +68,10 @@
     background-image: linear-gradient(#d8d8d8, #b6b6b6);
   }
 
+  .text-center {
+    text-align: center;
+  }
+
   .container {
     max-width: 600px;
     margin: 0 auto;
@@ -102,9 +106,19 @@
     background: #666;
   }
 
-  .keep-inline {
-    display: inline;
+  /* Solid border */
+  hr.solid {
+    margin: 8px 0px;
+    border: none;
+    border-bottom: 1px solid rgb(139, 139, 139);
+  }
+
+  .float-right {
     float: right;
+  }
+
+  .float-left {
+    float: left;
   }
 
   #app {
