@@ -1,20 +1,38 @@
 <template>
   <div id="todo-list">
-    <h2
-      class="list-title text-center"
-      @dblclick="editTitle = true"
-      v-if="editTitle === false"
-    >
-      {{ list.title }}
-    </h2>
-    <input
-      class="text-center"
-      type="text"
-      v-if="editTitle === true"
-      v-model="list.title"
-      @blur="updateListTitle"
-      @keyup.enter="updateListTitle"
-    />
+    <div class="list-header">
+      <h2
+        class="list-title text-center"
+        @dblclick="editTitle = true"
+        v-if="editTitle === false"
+      >
+        {{ list.title }}
+      </h2>
+      <input
+        class="text-center"
+        type="text"
+        v-if="editTitle === true"
+        v-model="list.title"
+        @blur="updateListTitle"
+        @keyup.enter="updateListTitle"
+      />
+      <i
+        @click="deleting = !deleting"
+        class="delete-list-btn fa fa-trash"
+        aria-hidden="true"
+      ></i>
+    </div>
+    <transition name="fadeUp">
+      <div v-if="deleting">
+        <p class="text-center">
+          Are you sure you want to delete this todo list?
+        </p>
+        <div class="text-center">
+          <button @click="deleteList" class="btn">Delete</button>
+          <button @click="deleting = false" class="btn">Cancel</button>
+        </div>
+      </div>
+    </transition>
     <AddTodo v-on:add-todo="createTodo" />
     <Todos
       v-bind:todos="list.todos"
@@ -38,6 +56,7 @@
     },
     data() {
       return {
+        deleting: false,
         list: {},
         editTitle: false,
       };
@@ -68,22 +87,69 @@
         this.$emit("update-list", this.list);
         this.editTitle = false;
       },
+      deleteList() {
+        this.$emit("remove-list", this.list.id);
+        this.$router.push("/");
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  .list-title {
-    color: #27a5d3 !important;
-    margin: 10px 0px 30px 0px;
-    cursor: pointer;
+  .btn {
+    margin: 10px;
+    background-color: #33b5e5;
+
+    &:hover {
+      background-color: darken($color: #33b5e5, $amount: 8%);
+    }
   }
 
-  input[type="text"] {
+  .list-header {
     width: 100%;
-    margin: 10px 0px;
-    padding: 10px;
-    background-color: #f0f0f0 !important;
-    border: 1px solid rgb(192, 192, 192);
+    position: relative;
+
+    .delete-list-btn {
+      font-size: 1.5em;
+      width: 50px;
+      color: #27a5d3;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      cursor: pointer;
+      right: 0;
+      transform: translate(0, -50%);
+    }
+
+    .list-title {
+      color: #27a5d3 !important;
+      margin: 10px 0px 30px 0px;
+      cursor: pointer;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      margin: 10px 0px;
+      padding: 10px;
+      background-color: #f0f0f0 !important;
+      border: 1px solid rgb(192, 192, 192);
+    }
+  }
+
+  .fadeUp-enter-active,
+  .fadeUp-leave-active {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .fadeUp-enter,
+  .fadeUp-leave-to {
+    opacity: 0%;
+    max-height: 0px;
+  }
+
+  .fadeUp-leave,
+  .fadeUp-enter-to {
+    opacity: 100%;
+    max-height: 73px;
   }
 </style>
