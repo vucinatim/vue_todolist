@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header class="sticky" />
     <div id="app" class="container">
       <router-view
         v-on:create-list="createList"
@@ -13,136 +13,150 @@
 </template>
 
 <script>
-import Header from "./components/layout/Header";
+  import Header from "./components/layout/Header";
 
-const STORAGE_KEY = "todo-storage";
+  const STORAGE_KEY = "todo-storage";
 
-export default {
-  name: "app",
-  components: {
-    Header,
-  },
-  data() {
-    return {
-      lists: [],
-    };
-  },
-  created() {
-    this.lists = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  },
-  methods: {
-    createList(newList) {
-      this.lists = [...this.lists, newList];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+  export default {
+    name: "app",
+    components: {
+      Header,
     },
-    updateList(updatedList) {
-      this.lists.forEach((item, i) => {
-        if (item.id == updatedList.id) this.lists[i] = updatedList;
-      });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+    data() {
+      return {
+        lists: [],
+      };
     },
-    removeList(id) {
-      this.lists = this.lists.filter((list) => list.id != id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+    created() {
+      this.lists = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     },
-  },
-};
+    methods: {
+      createList(newList) {
+        this.lists = [...this.lists, newList];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+      },
+      updateList(updatedList) {
+        this.lists.forEach((item, i) => {
+          if (item.id == updatedList.id) this.lists[i] = updatedList;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+      },
+      removeList(id) {
+        this.lists = this.lists.filter((list) => list.id != id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.lists));
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
-$base-color: #33b5e5;
-$light-gray-color: rgb(216, 216, 216);
+  $base-color: #33b5e5;
+  $light-gray-color: rgb(216, 216, 216);
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-html,
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
-  margin: 0;
-  height: 100%;
-  background-image: linear-gradient(#d8d8d8, #b6b6b6);
-}
+  html,
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    margin: 0;
+    height: 100%;
+    background-image: linear-gradient(#d8d8d8, #b6b6b6);
+    background-attachment: fixed;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .text-center {
+    text-align: center;
+  }
 
-.m-auto {
-  margin: auto;
-}
+  .sticky {
+    z-index: 100;
+    width: 100%;
+    position: fixed;
+    top: 0;
+  }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
+  .m-auto {
+    margin: auto;
+  }
 
-.flex {
-  display: flex;
-}
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
 
-.content-between {
-  justify-content: space-between;
-}
+  .flex {
+    display: flex;
+  }
 
-.card {
-  background-color: #f0f0f0;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 10px 0px;
-  padding: 4px 16px;
-}
+  .content-between {
+    justify-content: space-between;
+  }
 
-.btn {
-  display: inline-block;
-  border: none;
-  background: #555;
-  color: #f0f0f0;
-  padding: 7px 20px;
-  cursor: pointer;
-}
+  .card {
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px 0px;
+    padding: 4px 16px;
+  }
 
-.btn:hover {
-  background: #666;
-}
+  .btn {
+    display: inline-block;
+    border: none;
+    background: #555;
+    color: #f0f0f0;
+    padding: 7px 20px;
+    cursor: pointer;
+  }
 
-/* Solid border */
-hr.solid {
-  margin: 8px 0px;
-  border: none;
-  border-bottom: 1px solid rgb(139, 139, 139);
-}
+  .btn:hover {
+    background: #666;
+  }
 
-.float-right {
-  float: right;
-}
+  .validation-msg {
+    text-align: center;
+    color: #33b5e5;
+    margin: 10px 0px;
+  }
 
-.float-left {
-  float: left;
-}
+  /* Solid border */
+  hr.solid {
+    margin: 8px 0px;
+    border: none;
+    border-bottom: 1px solid rgb(139, 139, 139);
+  }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-}
+  .float-right {
+    float: right;
+  }
 
-#nav {
-  padding: 30px;
-}
+  .float-left {
+    float: left;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* text-align: center; */
+    color: #2c3e50;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #nav {
+    padding: 30px;
+  }
+
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
 </style>

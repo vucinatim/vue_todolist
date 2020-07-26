@@ -52,8 +52,15 @@
     position: relative;
     cursor: pointer;
 
-    &:hover .text-icon {
-      font-size: 70pt;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      color: #27a5d3;
+      border-color: #27a5d3;
+
+      .text-icon {
+        font-size: 70pt;
+      }
     }
 
     .text-icon {
