@@ -1,9 +1,11 @@
 <template>
     <div class="card" @click="addTaskFormOpen = true">
 
-        <p id="open-form-btn" class="text-center" v-if="!addTaskFormOpen">Add Task</p>
+        <transition name="fadeUp">
+            <p id="open-form-btn" class="text-center" v-if="!addTaskFormOpen">Add Task</p>
+        </transition>
 
-        <transition name="fade">
+        <transition name="expand">
             <form v-if="addTaskFormOpen" @submit="addTodo">
                 <input type="text" v-model="todoTitle" name="todoTitle" placeholder="Kaj je novega za opraviti?">
                 <textarea v-model="todoDescription" name="todoDescription" placeholder="Opis"></textarea>
@@ -38,7 +40,7 @@ export default {
                 title: this.todoTitle,
                 description: this.todoDescription,
                 completed: false,
-                deadline: new Date(this.todoDeadline),
+                deadline: this.todoDeadline,
                 user: 'user1'
             }
             // Send new todo up to parent
@@ -113,11 +115,33 @@ export default {
         cursor: pointer;
     }
 
-    .fade-enter-active, .fade-leave-active {
-        transition: all 0.3s ease-out;
+    .expand-enter-active, .expand-leave-active {
+        overflow: hidden;
+        transition: all .3s ease-in-out;
     }
 
-    .fade-enter, .fade-leave-to {
-        opacity: 0;
+    .expand-enter, .expand-leave-to {
+        height: 0px;
+        padding: 0px;
+        margin: 0px;
     }
+
+    .expand-leave, .expand-enter-to {
+        height: 153px;
+    }
+
+    .fadeUp-enter-active, .fadeUp-leave-active {
+        transition: all .3s ease-in-out;
+    }
+
+    .fadeUp-enter, .fadeUp-leave-to {
+        opacity: 0%;
+        max-height: 0px;
+    }
+
+    .fadeUp-leave, .fadeUp-enter-to {
+        opacity: 100%;
+        max-height: 23px;
+    }
+
 </style>

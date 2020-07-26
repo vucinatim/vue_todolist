@@ -5,7 +5,7 @@
           <div class="todo-item" v-if="!edit" v-bind:class="{'is-complete':todo.completed}">
             <div class="flex-container">
                 <div class="flex-item">
-                    <input type="checkbox" v-model="todo.completed">
+                    <input type="checkbox" v-model="todo.completed" @change="$emit('update-todo', todo)">
                     <div class="keep-inline">
                         <p>{{ todo.title }}</p>
                         <small>{{ todo.description }}</small>
@@ -46,12 +46,12 @@ export default {
         edit: false,
         todoTitle: this.todo.title,
         todoDescription: this.todo.description,
-        todoDeadline: this.todo.deadline.toISOString().split('T')[0]
+        todoDeadline: new Date(this.todo.deadline).toISOString().split('T')[0] || new Date()
       }
     },
     methods: {
       timeUntilDeadline(deadline) {
-        var diffTime = deadline - new Date();
+        var diffTime = new Date(deadline) - new Date();
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (diffDays > 0)
           return diffDays + " days left.";
@@ -64,6 +64,10 @@ export default {
         this.todo.title = this.todoTitle;
         this.todo.description = this.todoDescription;
         this.todo.deadline = new Date(this.todoDeadline);
+
+        // Send updated todo up to parent
+        this.$emit('update-todo', this.todo);
+
         this.edit = false;
       },
       startEditMode() {

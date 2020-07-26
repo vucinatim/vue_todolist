@@ -8,7 +8,11 @@
         
         <transition-group name="active-todo">
             <div class="active-todo" v-bind:key="todo.id+'active'" v-for="todo in todos">
-                <TodoItem v-if="todo.completed == false" v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
+                <TodoItem 
+                    v-if="todo.completed == false" 
+                    v-bind:todo="todo" 
+                    v-on:del-todo="$emit('del-todo', todo.id)"
+                    v-on:update-todo="$emit('update-todo', todo)"  />
             </div>
         </transition-group>
     
@@ -18,7 +22,11 @@
             <small class="text-btn" @click="uncheckAllTodos">Uncheck All</small>
         </div>
         <div class="completed-todo" v-bind:key="todo.id+'completed'" v-for="todo in todos">
-            <TodoItem v-if="todo.completed == true" v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
+            <TodoItem 
+                v-if="todo.completed == true"
+                v-bind:todo="todo" 
+                v-on:del-todo="$emit('del-todo', todo.id)"
+                v-on:update-todo="$emit('update-todo', todo)" />
         </div>
     </div>
 </template>
@@ -49,7 +57,8 @@ export default {
                 if (todo.completed)
                     todo.completed = false;
             });
-        }
+        },
+        
     }
 }
 
@@ -86,6 +95,7 @@ export default {
 .active-todo-enter, .active-todo-leave-to {
   transform: translateY(10px);
   opacity: 0;
+  max-height: 0;
 }
 
 .active-todo-leave-active {

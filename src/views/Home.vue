@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-for="list in todoLists" v-bind:key="list.id">
+      <EnterListBtn />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import EnterListBtn from '@/components/EnterListBtn.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    EnterListBtn
+  },
+  props: ["todoLists"]
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
