@@ -22,6 +22,8 @@
 import Todos from "../components/Todos";
 import AddTodo from "../components/AddTodo";
 
+const STORAGE_KEY = "todo-storage";
+
 export default {
   name: "TodoList",
   components: {
@@ -30,10 +32,17 @@ export default {
   },
   data() {
     return {
+      list: {},
       editTitle: false,
     };
   },
-  props: ["list"],
+  created() {
+    var id = this.$route.params.id;
+    this.list =
+      JSON.parse(localStorage.getItem(STORAGE_KEY)).find(
+        (list) => list.id == id
+      ) || {};
+  },
   methods: {
     createTodo(newTodo) {
       this.list.todos = [...this.list.todos, newTodo];

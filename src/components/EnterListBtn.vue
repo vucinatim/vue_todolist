@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'TodoList', params: { list: list } }">
+  <router-link :to="{ name: 'TodoList', params: { id: list.id } }">
     <div class="list-box card">
       <p class="text-center responsive-size">{{ list.title }}</p>
       <hr class="solid" />
@@ -18,9 +18,7 @@
 <script>
 export default {
   name: "EnterListBtn",
-  props: {
-    list: {},
-  },
+  props: ["list"],
 };
 </script>
 

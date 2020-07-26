@@ -10,9 +10,8 @@ const routes = [{
     component: Home
   },
   {
-    path: '/todo-list',
+    path: '/todo-list/:id',
     name: 'TodoList',
-    props: true,
     component: () => import('../views/TodoList.vue')
   }
 ]
