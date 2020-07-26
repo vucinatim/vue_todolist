@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <div class="create-new-box" @click="createNewList">
+    <div class="center-self create-new-box" @click="createNewList">
       <div class="text-icon">+</div>
       <p class="subtitle">Create a new Todolist</p>
     </div>
-    <div v-for="list in lists" v-bind:key="list.id">
+    <div class="center-self" v-for="list in lists" v-bind:key="list.id">
       <EnterListBtn v-bind:list="list" />
     </div>
   </div>
@@ -41,6 +41,11 @@
     display: grid;
     grid-gap: 40px;
     grid-template-columns: auto auto auto;
+    align-items: center;
+  }
+
+  .center-self {
+    justify-self: center;
   }
 
   .create-new-box {

@@ -179,7 +179,7 @@
 
     .v-bottom {
       margin-right: 20px;
-      vertical-align: bottom;
+      vertical-align: -webkit-baseline-middle;
     }
   }
 
@@ -251,7 +251,7 @@
     font-size: 24px;
     border: none;
     cursor: pointer;
-    float: right;
+    vertical-align: -webkit-baseline-middle;
 
     &:focus {
       outline: 0;
@@ -291,5 +291,55 @@
     opacity: 100%;
     max-height: 100px;
     padding: 10px;
+  }
+
+  @media (max-width: 530px) {
+    .card {
+      padding: 2px 2px;
+    }
+
+    .todo-item {
+      padding: 4px 4px;
+
+      p,
+      small {
+        font-size: 2.5vw;
+      }
+    }
+
+    .todo-info {
+      font-size: 2.4vw;
+    }
+
+    input[type="checkbox"] {
+      margin: 0 14px 0 8px !important;
+    }
+  }
+
+  @media (max-width: 434px) {
+    p,
+    small {
+      font-size: 0.6em !important;
+    }
+
+    .todo-info {
+      min-width: 40px;
+      font-size: 0.8em;
+    }
+
+    input[type="checkbox"] {
+      margin: 0 14px 0 8px !important;
+    }
+
+    .btn-group {
+      i {
+        margin-left: 7px !important;
+        margin-right: 5px !important;
+      }
+      button {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
   }
 </style>

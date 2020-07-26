@@ -85,7 +85,7 @@
   }
 
   .container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     padding: 60px 20px;
   }
@@ -158,5 +158,37 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  @media (max-width: 630px) {
+    .home {
+      grid-template-columns: auto auto !important;
+    }
+
+    .list-box {
+      p {
+        font-size: 2.6vw !important;
+      }
+    }
+  }
+
+  @media (max-width: 434px) {
+    .home {
+      grid-template-columns: auto !important;
+    }
+
+    .list-box {
+      p {
+        font-size: 0.9em !important;
+      }
+    }
+  }
+
+  @media (min-width: 850px) {
+    .list-box {
+      p {
+        font-size: 1em !important;
+      }
+    }
   }
 </style>
